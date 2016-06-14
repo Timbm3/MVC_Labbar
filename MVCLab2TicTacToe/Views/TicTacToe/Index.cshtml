@@ -1,0 +1,54 @@
+﻿@model MVCLab2TicTacToe.Models.TicTacToeModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm())
+{
+    for (int i = 0; i < Model.PlayerONumbers.Count; i++)
+    {
+  @Html.HiddenFor(m => m.PlayerONumbers[i])
+    }
+    for (int i = 0; i < Model.PlayerXNumbers.Count; i++)
+    {
+  @Html.HiddenFor(m => m.PlayerXNumbers[i])
+    }
+
+    @Html.HiddenFor(m => m.Turn)
+    @Html.HiddenFor(m => m.GameOver)
+    @Html.HiddenFor(m => m.GameOverText)
+    <table border="1" style="height: 150px" width="150px">
+
+        @for (int i = 0; i < 3; i++)
+        {
+            <tr>
+                @for (int j = 0; j < 3; j++)
+                {
+                    <td align="center">
+
+                        @if (Model.PlayerONumbers.Contains((j + 1) + (3*i)))
+                        {
+                            @Html.RadioButtonFor(m => m.Nooo, "O", new {type = "submit", size = "fill",})
+                        }
+                        else if (Model.PlayerXNumbers.Contains((j + 1) + (3*i)))
+                        {
+                            @Html.RadioButtonFor(m => m.Nooo, "X", new {type = "submit", size = "fill",})
+                        }
+
+                        else
+                        {
+
+                            @Html.RadioButtonFor(m => m.Choice, (j + 1) + (3*i), new {type = "submit", size = "fill",})
+                        }
+                    </td>
+                }
+            </tr>
+        }
+
+    </table>
+    @Html.DisplayTextFor(m => m.GameOverText)
+}
+
